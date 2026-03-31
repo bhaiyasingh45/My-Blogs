@@ -4,176 +4,510 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bhaiya's Tech Blog Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9fafb;
-      color: #1f2937;
     }
 
-    header {
-      background-color: #111827;
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent-blue: #2563eb;
+      --accent-purple: #7c3aed;
+      --accent-green: #059669;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 24px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: white;
-      padding: 40px 20px;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .logo-text h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .logo-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 24px;
+    }
+
+    .header-stat {
       text-align: center;
     }
 
-    header h1 {
-      font-size: 2.8em;
-      margin: 0;
+    .header-stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-blue);
     }
 
-    header p {
-      font-size: 1.2em;
-      margin-top: 8px;
-      color: #9ca3af;
+    .header-stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
     }
 
     .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      font-size: 1.25rem;
     }
 
     .section h2 {
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-      font-size: 1.6em;
-      color: #111827;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
     }
 
-    .blog-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .blog-list li {
-      background-color: white;
-      margin-bottom: 15px;
-      border: 1px solid #e5e7eb;
-      padding: 15px 20px;
-      border-radius: 8px;
-      transition: box-shadow 0.3s;
-    }
-
-    .blog-list li:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .blog-list a {
-      text-decoration: none;
-      color: #2563eb;
+    .section-count {
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
       font-weight: 500;
-      font-size: 1.05em;
+      margin-left: auto;
     }
 
-    .blog-list span {
-      display: block;
-      color: #6b7280;
-      font-size: 0.9em;
-      margin-top: 5px;
+    /* Blog Cards */
+    .blog-grid {
+      display: grid;
+      gap: 12px;
     }
 
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .blog-card:hover {
+      border-color: var(--accent-blue);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .blog-card-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .blog-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .blog-card:hover h3 {
+      color: var(--accent-blue);
+    }
+
+    .blog-card .meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .blog-card .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .blog-card .tag {
+      background: #ede9fe;
+      color: var(--accent-purple);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .blog-card .tag.github {
+      background: #d1fae5;
+      color: var(--accent-green);
+    }
+
+    .blog-card .date {
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .arrow-icon {
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .blog-card:hover .arrow-icon {
+      transform: translateX(4px);
+      color: var(--accent-blue);
+    }
+
+    /* Footer */
     footer {
+      background: var(--bg-primary);
       text-align: center;
-      padding: 30px 20px;
-      color: #6b7280;
-      font-size: 0.9em;
-      background-color: #f3f4f6;
-      margin-top: 40px;
+      padding: 32px 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      margin-top: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .logo {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .logo-text {
+        text-align: center;
+      }
+
+      .header-stats {
+        gap: 32px;
+      }
+
+      .blog-card {
+        padding: 16px;
+      }
+
+      .blog-card .meta {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Bhaiya's Tech Blog Hub 🚀</h1>
-    <p>Exploring AI, LLMs, and Cutting-Edge Technology</p>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">B</div>
+        <div class="logo-text">
+          <h1>Bhaiya's Tech Blog</h1>
+          <p>AI, LLMs & Cutting-Edge Tech</p>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="header-stat">
+          <div class="header-stat-number">12</div>
+          <div class="header-stat-label">Articles</div>
+        </div>
+        <div class="header-stat">
+          <div class="header-stat-number">3</div>
+          <div class="header-stat-label">Self-Hosted</div>
+        </div>
+        <div class="header-stat">
+          <div class="header-stat-number">9</div>
+          <div class="header-stat-label">Medium</div>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <div class="section">
-    <h2>📁 Self-Hosted Blogs</h2>
-    <ul class="blog-list">
-      <li>
-        <a href="tech_restructuring/">🔧 Tech Restructuring — How AI is Rebuilding Industries</a>
-        <span>Hosted on GitHub Pages</span>
-      </li>
-      <li>
-        <a href="Nano_Banana_Pro/">Nano Banana Pro: Google's Revolutionary Image Generation Model 🍌✨</a>
-        <span>Hosted on GitHub Pages</span>
-      </li>
-      <li>
-        <a href="SLMs-Finetuning/">🎯 SLM Fine-Tuning Use Cases — Industry Playbook</a>
-        <span>Hosted on GitHub Pages</span>
-      </li>
-    </ul>
-  </div>
+  <main class="container">
+    <section class="section">
+      <div class="section-header">
+        <span class="section-icon">📁</span>
+        <h2>Self-Hosted Blogs</h2>
+        <span class="section-count">3 articles</span>
+      </div>
+      <div class="blog-grid">
+        <a href="SLMs-Finetuning/" class="blog-card">
+          <div class="blog-card-content">
+            <h3>SLM Fine-Tuning Use Cases — Industry Playbook</h3>
+            <div class="meta">
+              <span class="tag github">GitHub Pages</span>
+              <span class="date">Mar 31, 2026</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
 
-  <div class="section">
-    <h2>✍️ Medium Blogs</h2>
-    <ul class="blog-list">
-      <li>
-        <a href="https://medium.com/@bhaiyahnsingh45/prompt-engineering-context-engineering-agent-skills-which-one-do-you-actually-need" target="_blank">
-          🎯 Prompt Engineering, Context Engineering, Agent Skills — Which One Do You Actually Need?
+        <a href="Nano_Banana_Pro/" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Nano Banana Pro: Google's Revolutionary Image Generation Model</h3>
+            <div class="meta">
+              <span class="tag github">GitHub Pages</span>
+              <span class="date">Nov 28, 2025</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Mar 14, 2026 · 7 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyahnsingh45/fine-tuning-google-functiongemma-270m-for-reliable-multi-agent-routing-bb27d5892e2e" target="_blank">
-          🔧 Fine-Tuning Google FunctionGemma (270M) for Reliable Multi-Agent Routing
+
+        <a href="tech_restructuring/" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Tech Restructuring — How AI is Rebuilding Industries</h3>
+            <div class="meta">
+              <span class="tag github">GitHub Pages</span>
+              <span class="date">2024</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Jan 7, 2026 · 22 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyasingh/how-i-passed-the-databricks-generative-ai-engineer-associate-exam-c7d8e3468368" target="_blank">
-          🧠 How I Passed the Databricks Generative AI Engineer Associate Exam
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <span class="section-icon">✍️</span>
+        <h2>Medium Blogs</h2>
+        <span class="section-count">9 articles</span>
+      </div>
+      <div class="blog-grid">
+        <a href="https://medium.com/@bhaiyahnsingh45/prompt-engineering-context-engineering-agent-skills-which-one-do-you-actually-need-f6009455391d" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Prompt Engineering, Context Engineering, Agent Skills — Which One Do You Actually Need?</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Mar 14, 2026</span>
+              <span class="meta-item">7 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Jun 14, 2025 · 4 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyasingh/integrating-sharepoint-data-with-your-rag-chatbot-two-approaches-for-secure-access-e8ccabfbc8fe" target="_blank">
-          🔐 Integrating SharePoint Data with Your RAG Chatbot: Two Approaches for Secure Access
+
+        <a href="https://medium.com/@bhaiyahnsingh45/fine-tuning-google-functiongemma-270m-for-reliable-multi-agent-routing-bb27d5892e2e" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Fine-Tuning Google FunctionGemma (270M) for Reliable Multi-Agent Routing</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Jan 7, 2026</span>
+              <span class="meta-item">22 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Mar 6, 2025 · 6 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyasingh/integrating-sharepoint-data-with-your-rag-chatbot-two-approaches-for-secure-access-e8ccabfbc8fe" target="_blank">
-          🐜 How Ants Can Solve Complex Business Problems: Ant Colony Optimization
+
+        <a href="https://medium.com/@bhaiyasingh/how-i-passed-the-databricks-generative-ai-engineer-associate-exam-c7d8e3468368" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>How I Passed the Databricks Generative AI Engineer Associate Exam</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Jun 14, 2025</span>
+              <span class="meta-item">4 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Oct 5, 2024 · 4 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyasingh/understanding-prompt-injection-a-real-world-guide-to-a-growing-threat-20031a23ba35" target="_blank">
-          🚨 Understanding Prompt Injection: A Real-World Guide to a Growing Threat
+
+        <a href="https://medium.com/@bhaiyasingh/integrating-sharepoint-data-with-your-rag-chatbot-two-approaches-for-secure-access-e8ccabfbc8fe" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Integrating SharePoint Data with Your RAG Chatbot: Two Approaches for Secure Access</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Mar 6, 2025</span>
+              <span class="meta-item">6 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Aug 31, 2024 · 4 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyasingh/introducing-gpt-40-mini-the-future-of-cost-efficient-ai-a-detailed-comparison-with-gpt-4o-3e41e6b4269e" target="_blank">
-          💡 Introducing GPT-40 Mini: Cost-Efficient AI vs GPT-4o
+
+        <a href="https://medium.com/@bhaiyasingh/how-ants-can-solve-complex-business-problems-ant-colony-optimization" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>How Ants Can Solve Complex Business Problems: Ant Colony Optimization</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Oct 5, 2024</span>
+              <span class="meta-item">4 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Aug 4, 2024 · 17 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyasingh/customizing-large-language-models-llms-with-your-data-exploring-the-best-methods-b4a13e939b77" target="_blank">
-          🛠️ Customizing LLMs with Your Data: Best Methods
+
+        <a href="https://medium.com/@bhaiyasingh/understanding-prompt-injection-a-real-world-guide-to-a-growing-threat-20031a23ba35" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Understanding Prompt Injection: A Real-World Guide to a Growing Threat</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Aug 31, 2024</span>
+              <span class="meta-item">4 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Jul 18, 2024 · 5 min read</span>
-      </li>
-      <li>
-        <a href="https://medium.com/@bhaiyasingh/overcoming-the-top-5-challenges-in-deploying-llm-agents-into-production-937b27ebd1c1" target="_blank">
-          🚧 Top 5 Challenges in Deploying LLM Agents to Production
+
+        <a href="https://medium.com/@bhaiyasingh/introducing-gpt-40-mini-the-future-of-cost-efficient-ai-a-detailed-comparison-with-gpt-4o-3e41e6b4269e" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Introducing GPT-40 Mini: Cost-Efficient AI vs GPT-4o</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Aug 4, 2024</span>
+              <span class="meta-item">17 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
-        <span>Jun 18, 2024 · 3 min read</span>
-      </li>
-    </ul>
-  </div>
+
+        <a href="https://medium.com/@bhaiyasingh/customizing-large-language-models-llms-with-your-data-exploring-the-best-methods-b4a13e939b77" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Customizing LLMs with Your Data: Best Methods</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Jul 18, 2024</span>
+              <span class="meta-item">5 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <a href="https://medium.com/@bhaiyasingh/overcoming-the-top-5-challenges-in-deploying-llm-agents-into-production-937b27ebd1c1" target="_blank" class="blog-card">
+          <div class="blog-card-content">
+            <h3>Top 5 Challenges in Deploying LLM Agents to Production</h3>
+            <div class="meta">
+              <span class="tag">Medium</span>
+              <span class="date">Jun 18, 2024</span>
+              <span class="meta-item">3 min read</span>
+            </div>
+          </div>
+          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    © 2026 Bhaiya HN Singh — All Rights Reserved
+    <p>&copy; 2026 Bhaiya HN Singh — All Rights Reserved</p>
+    <p class="footer-links">
+      <a href="https://medium.com/@bhaiyahnsingh45" target="_blank">Medium</a> &middot;
+      <a href="https://github.com/bhaiyasingh" target="_blank">GitHub</a>
+    </p>
   </footer>
 
 </body>
