@@ -234,13 +234,14 @@
     padding: 0 clamp(1.5rem, 5vw, 4rem);
   }
 
-  /* ───────────── FILTER BAR ───────────── */
+  /* ───────────── FILTER DROPDOWN ───────────── */
   .filter-section {
     padding: 1.75rem 0 1.25rem;
     border-bottom: 1px solid var(--border-light);
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
   }
   .filter-label {
     font-size: 11px;
@@ -251,50 +252,51 @@
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .filter-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+  .filter-dropdown-wrap {
+    position: relative;
+    min-width: 220px;
   }
-  .filter-btn {
-    padding: 5px 14px;
-    font-size: 12px;
+  .filter-dropdown {
+    width: 100%;
+    padding: 10px 40px 10px 14px;
+    font-size: 13px;
     font-family: var(--font-sans);
     font-weight: 500;
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    background: transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    letter-spacing: 0.01em;
-  }
-  .filter-btn:hover {
-    border-color: var(--border-mid);
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius-md);
+    background: var(--white);
     color: var(--text-primary);
-    background: var(--off-white);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: all 0.15s ease;
   }
-  .filter-btn.active {
-    background: var(--text-primary);
-    color: white;
-    border-color: var(--text-primary);
+  .filter-dropdown:hover {
+    border-color: var(--text-muted);
   }
-  .count-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    background: var(--border-light);
-    border-radius: 50%;
-    font-size: 10px;
+  .filter-dropdown:focus {
+    outline: none;
+    border-color: var(--accent-teal);
+    box-shadow: 0 0 0 3px rgba(15,110,86,0.1);
+  }
+  .filter-dropdown-wrap::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--text-muted);
+    pointer-events: none;
+  }
+  .filter-count {
+    font-size: 12px;
     font-family: var(--font-mono);
-    color: var(--text-secondary);
-    margin-left: 4px;
-  }
-  .filter-btn.active .count-badge {
-    background: rgba(255,255,255,0.2);
-    color: white;
+    color: var(--text-muted);
+    margin-left: auto;
   }
 
   /* ───────────── GRID ───────────── */
@@ -807,16 +809,128 @@
   }
 
   /* ───────────── RESPONSIVE ───────────── */
-  @media (max-width: 700px) {
+
+  /* Extra large screens (1600px+) */
+  @media (min-width: 1600px) {
+    .main, .hero-inner, .site-header-inner, .footer-inner {
+      max-width: 1440px;
+    }
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+    .hero-title { font-size: 4rem; }
+    .stat-num { font-size: 32px; }
+  }
+
+  /* Large screens (1200px - 1599px) */
+  @media (min-width: 1200px) and (max-width: 1599px) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    }
+  }
+
+  /* Medium screens / tablets (768px - 1199px) */
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+    .hero-title { font-size: clamp(2rem, 4vw, 3rem); }
+    .sector-pills { max-width: 220px; }
+  }
+
+  /* Small screens / large phones (576px - 767px) */
+  @media (min-width: 576px) and (max-width: 767px) {
     .hero-inner { grid-template-columns: 1fr; }
     .hero-aside { display: none; }
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .hero-stats {
+      flex-wrap: wrap;
+      gap: 1.5rem 2rem;
+    }
+    .m-list { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Extra small screens / phones (< 576px) */
+  @media (max-width: 575px) {
+    .site-header-inner { height: 50px; }
+    .logo-text { font-size: 12px; }
+    .logo-sub { font-size: 10px; }
+    .header-meta { font-size: 10px; }
+
+    .hero { padding: 3rem clamp(1rem, 4vw, 1.5rem) 2.5rem; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-aside { display: none; }
+    .hero-title { font-size: 1.75rem; }
+    .hero-desc { font-size: 14px; }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .stat-num { font-size: 24px; }
+
+    .main { padding: 0 clamp(1rem, 4vw, 1.5rem); }
+
+    .filter-section {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+    .filter-dropdown-wrap { min-width: 100%; }
+    .filter-count { margin-left: 0; margin-top: 0.5rem; }
+
+    .card-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .card { padding: 1rem; }
+    .card-title { font-size: 13.5px; }
+    .card-desc { font-size: 12px; }
+    .task-badge { font-size: 9px; padding: 2px 7px; }
+
+    .modal-overlay { padding: 0.75rem; }
+    .modal-box {
+      border-radius: var(--radius-md);
+      max-height: 95vh;
+    }
+    .modal-header { padding: 1.25rem 1.25rem 1rem; }
+    .modal-body { padding: 1rem 1.25rem; gap: 1.25rem; }
+    .modal-title { font-size: 18px; }
+    .modal-cta {
+      padding: 1rem 1.25rem;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .cta-btn { width: 100%; justify-content: center; }
+
     .m-list { grid-template-columns: 1fr; }
     .info-row { grid-template-columns: 1fr; }
     .info-row-3 { grid-template-columns: 1fr; }
-    .modal-box { border-radius: var(--radius-md); }
-    .filter-section { flex-direction: column; align-items: flex-start; }
-    .hero-stats { gap: 1.5rem; }
-    .footer-inner { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .sample-q { font-size: 11.5px; padding: 8px 12px; }
+
+    .footer-inner {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .footer-tags { justify-content: flex-start; }
+  }
+
+  /* Touch-friendly hover states */
+  @media (hover: none) {
+    .card:hover {
+      transform: none;
+      box-shadow: var(--shadow-card);
+    }
+    .card:active {
+      transform: scale(0.98);
+    }
   }
 </style>
 </head>
@@ -881,8 +995,13 @@
 <div class="main">
   <!-- FILTERS -->
   <div class="filter-section">
-    <span class="filter-label">Filter by</span>
-    <div class="filter-bar" id="filters"></div>
+    <span class="filter-label">Filter by sector</span>
+    <div class="filter-dropdown-wrap">
+      <select class="filter-dropdown" id="filter-dropdown">
+        <option value="all">All Sectors</option>
+      </select>
+    </div>
+    <span class="filter-count" id="filter-count">Showing 40 of 40</span>
   </div>
 
   <!-- GRID -->
@@ -1049,15 +1168,14 @@ function initDynamicUI() {
   const pillsContainer = document.getElementById('sector-pills');
   pillsContainer.innerHTML = sectors.map(s => `<span class="s-pill">${s}</span>`).join('');
 
-  // Generate filter buttons
-  const filtersContainer = document.getElementById('filters');
-  const filterBtns = ['<button class="filter-btn active" data-filter="all">All</button>'];
+  // Generate filter dropdown options
+  const dropdown = document.getElementById('filter-dropdown');
+  dropdown.innerHTML = `<option value="all">All Sectors (${DATA.length})</option>`;
   sectors.forEach(s => {
     const label = SECTOR_LABELS[s] || s;
     const count = DATA.filter(d => d.sector === s).length;
-    filterBtns.push(`<button class="filter-btn" data-filter="${s}">${label} <span class="count-badge">${count}</span></button>`);
+    dropdown.innerHTML += `<option value="${s}">${label} (${count})</option>`;
   });
-  filtersContainer.innerHTML = filterBtns.join('');
 }
 
 let activeFilter = 'all';
@@ -1065,9 +1183,12 @@ let activeFilter = 'all';
 function renderCards(filter) {
   const grid = document.getElementById('card-grid');
   const countEl = document.getElementById('grid-count');
+  const filterCountEl = document.getElementById('filter-count');
   grid.innerHTML = '';
   const filtered = DATA.filter(d => filter === 'all' || d.sector === filter);
-  countEl.textContent = `Showing ${filtered.length} of ${DATA.length}`;
+  const countText = `Showing ${filtered.length} of ${DATA.length}`;
+  countEl.textContent = countText;
+  if (filterCountEl) filterCountEl.textContent = countText;
   filtered.forEach((d, i) => {
     const { bg, fg } = getStyle(d.taskType);
     const models = d.models.map(m => `<span class="model-chip">${m}</span>`).join('');
@@ -1203,11 +1324,8 @@ function handleOverlayClick(e) {
 
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
-document.getElementById('filters').addEventListener('click', e => {
-  const btn = e.target.closest('.filter-btn');
-  if(!btn) return;
-  activeFilter = btn.dataset.filter;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === activeFilter));
+document.getElementById('filter-dropdown').addEventListener('change', e => {
+  activeFilter = e.target.value;
   renderCards(activeFilter);
 });
 
