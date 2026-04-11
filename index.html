@@ -6,7 +6,7 @@
   <title>Bhaiya's Tech Blog Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -15,105 +15,186 @@
     }
 
     :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8fafc;
-      --bg-card: #ffffff;
-      --bg-card-hover: #f8fafc;
-      --text-primary: #1e293b;
-      --text-secondary: #475569;
-      --text-muted: #94a3b8;
-      --accent-blue: #2563eb;
-      --accent-purple: #7c3aed;
-      --accent-green: #059669;
-      --border-color: #e2e8f0;
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      --bg-primary: #FAFBFC;
+      --bg-secondary: #F0F4F8;
+      --bg-card: #FFFFFF;
+      --text-primary: #1a2b3c;
+      --text-secondary: #4a5568;
+      --text-muted: #718096;
+      --accent-teal: #0D9488;
+      --accent-teal-light: #14B8A6;
+      --accent-blue: #0EA5E9;
+      --accent-orange: #F97316;
+      --accent-green: #10B981;
+      --border-color: #E2E8F0;
+      --gradient-1: linear-gradient(135deg, #0D9488 0%, #0EA5E9 100%);
+      --gradient-2: linear-gradient(135deg, #F0FDFA 0%, #E0F2FE 100%);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+      --shadow-glow: 0 0 40px rgba(13, 148, 136, 0.15);
     }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-secondary);
+      background: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.6;
       min-height: 100vh;
     }
 
-    /* Header */
-    .header {
-      background: var(--bg-primary);
-      border-bottom: 1px solid var(--border-color);
-      padding: 24px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    /* Hero Header */
+    .hero-header {
+      background: var(--gradient-2);
+      position: relative;
+      overflow: hidden;
+      padding: 60px 20px 80px;
     }
 
-    .header-content {
-      max-width: 1000px;
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-header::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 48px;
+      position: relative;
+      z-index: 1;
     }
 
-    .logo {
+    .hero-image {
+      flex-shrink: 0;
+    }
+
+    .hero-image img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-image img:hover {
+      transform: scale(1.05);
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .hero-text h1 span {
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .hero-stats {
       display: flex;
-      align-items: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .hero-stat {
+      text-align: left;
+    }
+
+    .hero-stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    .social-links {
+      display: flex;
       gap: 12px;
     }
 
-    .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      border-radius: 12px;
+    .social-link {
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700;
-      font-size: 1.25rem;
+      gap: 8px;
+      padding: 10px 18px;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
     }
 
-    .logo-text h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-primary);
+    .social-link:hover {
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
-    .logo-text p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .header-stats {
-      display: flex;
-      gap: 24px;
-    }
-
-    .header-stat {
-      text-align: center;
-    }
-
-    .header-stat-number {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent-blue);
-    }
-
-    .header-stat-label {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .social-link svg,
+    .social-link img {
+      width: 18px;
+      height: 18px;
     }
 
     /* Main Content */
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 20px 60px;
+      padding: 48px 20px 60px;
     }
 
     .section {
@@ -123,53 +204,81 @@
     .section-header {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--bg-secondary);
     }
 
     .section-icon {
-      font-size: 1.25rem;
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
     }
 
     .section h2 {
-      font-size: 1.125rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: var(--text-primary);
     }
 
     .section-count {
-      background: var(--bg-secondary);
-      color: var(--text-muted);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 500;
+      background: var(--gradient-2);
+      color: var(--accent-teal);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
       margin-left: auto;
+      border: 1px solid rgba(13, 148, 136, 0.2);
     }
 
     /* Blog Cards */
     .blog-grid {
       display: grid;
-      gap: 12px;
+      gap: 16px;
     }
 
     .blog-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px 24px;
+      border-radius: 16px;
+      padding: 24px 28px;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
       box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--gradient-1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .blog-card:hover {
-      border-color: var(--accent-blue);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-1px);
+      border-color: transparent;
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      transform: translateY(-3px);
+    }
+
+    .blog-card:hover::before {
+      opacity: 1;
     }
 
     .blog-card-content {
@@ -178,43 +287,45 @@
     }
 
     .blog-card h3 {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 6px;
+      margin-bottom: 10px;
       line-height: 1.4;
+      transition: color 0.2s ease;
     }
 
     .blog-card:hover h3 {
-      color: var(--accent-blue);
+      color: var(--accent-teal);
     }
 
     .blog-card .meta {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    .blog-card .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      font-size: 0.85rem;
     }
 
     .blog-card .tag {
-      background: #ede9fe;
-      color: var(--accent-purple);
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
       font-size: 0.7rem;
-      font-weight: 500;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
 
     .blog-card .tag.github {
-      background: #d1fae5;
+      background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
       color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .blog-card .tag.medium {
+      background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+      color: var(--accent-orange);
+      border: 1px solid rgba(249, 115, 22, 0.2);
     }
 
     .blog-card .date {
@@ -222,105 +333,254 @@
       color: var(--text-secondary);
     }
 
-    .arrow-icon {
+    .blog-card .read-time {
       color: var(--text-muted);
-      transition: all 0.2s ease;
+      font-size: 0.8rem;
+    }
+
+    .arrow-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
       flex-shrink: 0;
     }
 
+    .arrow-icon svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
     .blog-card:hover .arrow-icon {
-      transform: translateX(4px);
-      color: var(--accent-blue);
+      background: var(--gradient-1);
+      color: white;
+    }
+
+    .blog-card:hover .arrow-icon svg {
+      transform: translateX(3px);
     }
 
     /* Footer */
     footer {
-      background: var(--bg-primary);
-      text-align: center;
-      padding: 32px 20px;
-      border-top: 1px solid var(--border-color);
+      background: var(--gradient-2);
+      padding: 48px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .footer-brand-text h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .footer-brand-text p {
+      font-size: 0.8rem;
       color: var(--text-muted);
-      font-size: 0.875rem;
-    }
-
-    footer a {
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
     }
 
     .footer-links {
-      margin-top: 8px;
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-teal);
+    }
+
+    .footer-links a svg,
+    .footer-links a img {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-copyright {
+      width: 100%;
+      text-align: center;
+      padding-top: 24px;
+      margin-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
     }
 
     /* Responsive */
-    @media (max-width: 640px) {
-      .header-content {
+    @media (max-width: 768px) {
+      .hero-content {
         flex-direction: column;
-        gap: 16px;
         text-align: center;
       }
 
-      .logo {
-        flex-direction: column;
-        gap: 8px;
+      .hero-text h1 {
+        font-size: 2rem;
       }
 
-      .logo-text {
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .hero-stat {
         text-align: center;
       }
 
-      .header-stats {
-        gap: 32px;
+      .social-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-brand {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-header {
+        padding: 40px 16px 60px;
+      }
+
+      .hero-image img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+
+      .hero-stat-number {
+        font-size: 1.5rem;
       }
 
       .blog-card {
-        padding: 16px;
+        padding: 18px 20px;
       }
 
       .blog-card .meta {
         flex-wrap: wrap;
         gap: 8px;
       }
+
+      .social-link {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header class="header">
-    <div class="header-content">
-      <div class="logo">
-        <div class="logo-icon">B</div>
-        <div class="logo-text">
-          <h1>Bhaiya's Tech Blog</h1>
-          <p>AI, LLMs & Cutting-Edge Tech</p>
-        </div>
+  <!-- Hero Header -->
+  <header class="hero-header">
+    <div class="hero-content">
+      <div class="hero-image">
+        <img src="assets/my_image.png" alt="Bhaiya HN Singh" />
       </div>
-      <div class="header-stats">
-        <div class="header-stat">
-          <div class="header-stat-number">13</div>
-          <div class="header-stat-label">Articles</div>
+      <div class="hero-text">
+        <h1>Hi, I'm <span>Bhaiya HN Singh</span></h1>
+        <p class="hero-tagline">Senior Data Scientist @Nagarro | Generative AI & Agentic AI Specialist</p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-number">13</div>
+            <div class="hero-stat-label">Articles</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number">4</div>
+            <div class="hero-stat-label">Self-Hosted</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number">9</div>
+            <div class="hero-stat-label">On Medium</div>
+          </div>
         </div>
-        <div class="header-stat">
-          <div class="header-stat-number">4</div>
-          <div class="header-stat-label">Self-Hosted</div>
-        </div>
-        <div class="header-stat">
-          <div class="header-stat-number">9</div>
-          <div class="header-stat-label">Medium</div>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/bhaiyahnsingh45/" target="_blank" class="social-link">
+            <img src="assets/linkedin-svgrepo-com.svg" alt="LinkedIn" />
+            LinkedIn
+          </a>
+          <a href="https://github.com/bhaiyahnsingh45" target="_blank" class="social-link">
+            <img src="assets/github-color-svgrepo-com.svg" alt="GitHub" />
+            GitHub
+          </a>
+          <a href="https://medium.com/@bhaiyahnsingh45" target="_blank" class="social-link">
+            <img src="assets/medium-svgrepo-com.svg" alt="Medium" />
+            Medium
+          </a>
+          <a href="https://huggingface.co/bhaiyahnsingh45" target="_blank" class="social-link">
+            <img src="assets/hugging-face-svgrepo-com.svg" alt="Hugging Face" />
+            Hugging Face
+          </a>
         </div>
       </div>
     </div>
   </header>
 
   <main class="container">
+    <!-- Self-Hosted Blogs -->
     <section class="section">
       <div class="section-header">
-        <span class="section-icon">📁</span>
+        <div class="section-icon">📁</div>
         <h2>Self-Hosted Blogs</h2>
         <span class="section-count">4 articles</span>
       </div>
@@ -329,59 +589,68 @@
           <div class="blog-card-content">
             <h3>Claude Mythos: The AI Too Dangerous to Release</h3>
             <div class="meta">
-              <span class="tag github">GitHub Pages</span>
+              <span class="tag github">Self-Hosted</span>
               <span class="date">Apr 11, 2026</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="SLMs-Finetuning/" class="blog-card">
           <div class="blog-card-content">
             <h3>SLM Fine-Tuning Use Cases — Industry Playbook</h3>
             <div class="meta">
-              <span class="tag github">GitHub Pages</span>
+              <span class="tag github">Self-Hosted</span>
               <span class="date">Mar 31, 2026</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="Nano_Banana_Pro/" class="blog-card">
           <div class="blog-card-content">
             <h3>Nano Banana Pro: Google's Revolutionary Image Generation Model</h3>
             <div class="meta">
-              <span class="tag github">GitHub Pages</span>
+              <span class="tag github">Self-Hosted</span>
               <span class="date">Nov 28, 2025</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="tech_restructuring/" class="blog-card">
           <div class="blog-card-content">
             <h3>Tech Restructuring — How AI is Rebuilding Industries</h3>
             <div class="meta">
-              <span class="tag github">GitHub Pages</span>
+              <span class="tag github">Self-Hosted</span>
               <span class="date">2024</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
       </div>
     </section>
 
+    <!-- Medium Blogs -->
     <section class="section">
       <div class="section-header">
-        <span class="section-icon">✍️</span>
+        <div class="section-icon">✍️</div>
         <h2>Medium Blogs</h2>
         <span class="section-count">9 articles</span>
       </div>
@@ -390,137 +659,181 @@
           <div class="blog-card-content">
             <h3>Prompt Engineering, Context Engineering, Agent Skills — Which One Do You Actually Need?</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Mar 14, 2026</span>
-              <span class="meta-item">7 min read</span>
+              <span class="read-time">7 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyahnsingh45/fine-tuning-google-functiongemma-270m-for-reliable-multi-agent-routing-bb27d5892e2e" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>Fine-Tuning Google FunctionGemma (270M) for Reliable Multi-Agent Routing</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Jan 7, 2026</span>
-              <span class="meta-item">22 min read</span>
+              <span class="read-time">22 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyasingh/how-i-passed-the-databricks-generative-ai-engineer-associate-exam-c7d8e3468368" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>How I Passed the Databricks Generative AI Engineer Associate Exam</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Jun 14, 2025</span>
-              <span class="meta-item">4 min read</span>
+              <span class="read-time">4 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyasingh/integrating-sharepoint-data-with-your-rag-chatbot-two-approaches-for-secure-access-e8ccabfbc8fe" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>Integrating SharePoint Data with Your RAG Chatbot: Two Approaches for Secure Access</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Mar 6, 2025</span>
-              <span class="meta-item">6 min read</span>
+              <span class="read-time">6 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyasingh/how-ants-can-solve-complex-business-problems-ant-colony-optimization" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>How Ants Can Solve Complex Business Problems: Ant Colony Optimization</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Oct 5, 2024</span>
-              <span class="meta-item">4 min read</span>
+              <span class="read-time">4 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyasingh/understanding-prompt-injection-a-real-world-guide-to-a-growing-threat-20031a23ba35" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>Understanding Prompt Injection: A Real-World Guide to a Growing Threat</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Aug 31, 2024</span>
-              <span class="meta-item">4 min read</span>
+              <span class="read-time">4 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyasingh/introducing-gpt-40-mini-the-future-of-cost-efficient-ai-a-detailed-comparison-with-gpt-4o-3e41e6b4269e" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>Introducing GPT-40 Mini: Cost-Efficient AI vs GPT-4o</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Aug 4, 2024</span>
-              <span class="meta-item">17 min read</span>
+              <span class="read-time">17 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyasingh/customizing-large-language-models-llms-with-your-data-exploring-the-best-methods-b4a13e939b77" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>Customizing LLMs with Your Data: Best Methods</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Jul 18, 2024</span>
-              <span class="meta-item">5 min read</span>
+              <span class="read-time">5 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
 
         <a href="https://medium.com/@bhaiyasingh/overcoming-the-top-5-challenges-in-deploying-llm-agents-into-production-937b27ebd1c1" target="_blank" class="blog-card">
           <div class="blog-card-content">
             <h3>Top 5 Challenges in Deploying LLM Agents to Production</h3>
             <div class="meta">
-              <span class="tag">Medium</span>
+              <span class="tag medium">Medium</span>
               <span class="date">Jun 18, 2024</span>
-              <span class="meta-item">3 min read</span>
+              <span class="read-time">3 min read</span>
             </div>
           </div>
-          <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <div class="arrow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </a>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Bhaiya HN Singh — All Rights Reserved</p>
-    <p class="footer-links">
-      <a href="https://medium.com/@bhaiyahnsingh45" target="_blank">Medium</a> &middot;
-      <a href="https://github.com/bhaiyasingh" target="_blank">GitHub</a>
-    </p>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="assets/my_image.png" alt="Bhaiya HN Singh" />
+        <div class="footer-brand-text">
+          <h3>Bhaiya HN Singh</h3>
+          <p>AI & ML Enthusiast</p>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/bhaiyahnsingh45/" target="_blank">
+          <img src="assets/linkedin-svgrepo-com.svg" alt="LinkedIn" />
+          LinkedIn
+        </a>
+        <a href="https://github.com/bhaiyahnsingh45" target="_blank">
+          <img src="assets/github-color-svgrepo-com.svg" alt="GitHub" />
+          GitHub
+        </a>
+        <a href="https://medium.com/@bhaiyahnsingh45" target="_blank">
+          <img src="assets/medium-svgrepo-com.svg" alt="Medium" />
+          Medium
+        </a>
+        <a href="https://huggingface.co/bhaiyahnsingh45" target="_blank">
+          <img src="assets/hugging-face-svgrepo-com.svg" alt="Hugging Face" />
+          Hugging Face
+        </a>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2026 Bhaiya HN Singh — All Rights Reserved
+      </div>
+    </div>
   </footer>
 
 </body>
